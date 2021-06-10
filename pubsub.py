@@ -13,6 +13,11 @@ import json
 import systeminfo
 import datetime
 
+import random
+from faker import Faker
+
+faker = Faker()
+
 # This sample uses the Message Broker for AWS IoT to send and receive messages
 # through an MQTT connection. On startup, the device connects to the server,
 # subscribes to a topic, and begins publishing messages to that topic.
@@ -163,6 +168,8 @@ if __name__ == '__main__':
             message['cpuutil'] = systeminfo.get_cpu_usage_pct()
             message['memutil'] = systeminfo.get_ram_usage_pct()
             message['swaputil'] = systeminfo.get_swap_usage_pct()
+            message['logLevel'] = str(random.choices(['INFO', 'WARN', 'ERROR'], [0.90, 0.05, 0.05], k=1)[0])
+            message['msg'] = faker.text()
             
             # message = "{} [{}]".format(args.message, publish_count)
             print("Publishing message to topic '{}': {}".format(args.topic, message))
