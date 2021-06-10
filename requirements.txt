@@ -1,3 +1,4 @@
 psutil
 awsiotsdk
 awscrt
+faker
